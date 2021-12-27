@@ -7,7 +7,7 @@ colorscheme dracula
 syntax on
 set nocompatible
 filetype plugin indent on
-set number
+set relativenumber
 set ruler
 set encoding=utf-8
 set wrap
@@ -36,9 +36,11 @@ set showmatch
 
 set t_Co=256
 
-nnoremap <A-V> :e ~/.config/nvim/init.vim <CR>
-autocmd filetype cpp nnoremap <F5> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
-autocmd filetype cpp nnoremap <F9> :!%:r<CR>
+set mouse=a
+
+nnoremap <A-V> :tabnew ~/.config/nvim/init.vim <CR>
+autocmd filetype cpp nnoremap <F5> :w <bar> !g++ -std=c++14 -Wshadow -Wall %:p -o %:r -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG<CR>
+autocmd filetype cpp nnoremap <F9> :vsplit <bar> terminal %:p:r <CR> i
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {{ {
